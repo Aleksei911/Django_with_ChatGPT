@@ -11,15 +11,14 @@ openai.api_key = openai_api_key
 
 
 def ask_openai(message):
-    reponse = openai.Completion.create(
-        model='text-davinci-003',
-        promt=message,
-        max_tokens=150,
-        n=1,
-        stop=None,
-        temperature=0.7,
+    response = openai.ChatCompletion.create(
+        model='gpt-4',
+        messages=[
+            {'role': 'system', 'content': 'You are an helpful assistant.'},
+            {'role': 'user', 'content': message},
+        ]
     )
-    answer = reponse.choices[0].text.strip()
+    answer = response.choices[0].message.content.strip()
     return answer
 
 
